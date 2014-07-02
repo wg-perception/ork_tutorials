@@ -61,7 +61,7 @@ In order to find planes using ORK_Tabletop, run the following command:
 
 .. code-block:: sh
 
-    rosrun object_recognition_tabletop detection -c `rospack find object_recognition_tabletop`/conf/detection.table.ros.ork
+    rosrun object_recognition_core detection -c `rospack find object_recognition_tabletop`/conf/detection.table.ros.ork
     
 Then go to ``RViz`` graphical window, and add the OrkTable display. Now you should see some planes detected by ORK_Tabletop if your camera is pointing to some plane surfaces.
 
@@ -72,7 +72,7 @@ Then go to ``RViz`` graphical window, and add the OrkTable display. Now you shou
 Finding objects
 ***************
 
-If you follow the installation guide (https://github.com/hris2003/object_recognition_core/blob/master/doc/source/install.rst), you know that ORK uses couchDB to manage the objects database. In order to have tabletop detect objects, we need to feed the databases with objects' 3D models.
+If you follow the installation guide (http://wg-perception.github.io/object_recognition_core/install.html#install), you know that ORK uses couchDB to manage the objects database. In order to have tabletop detect objects, we need to feed the databases with objects' 3D models.
 
 When you first installed ORK, my database was empty. Luckily, ork tutorials comes with 3D model of a coke can. So, download the tutorials:
 
