@@ -5,6 +5,7 @@ Object Recognition DB
 
 In the Object Recognition Kitchen, everything is stored in a database: objects, models, training data. We'll walk you through the basics of the DB in this tutorial, you will:
 
+   * preparing object's mesh to add to the DB
    * learn how to manually add an object to the DB
    * visualize data in the ``ORK`` DB
 
@@ -14,6 +15,20 @@ Introduction
 Make sure you followed the steps in the core :ref:`DB instructions <orkcore:object_recognition_core_db>`, especially to get the 3d visualizer in the DB.
 
 The example we will use is a can of Coke as it's somewhat universal :) For real life experiments, just get the iconic red can and there should not be too many appearance changes.
+
+Prepare object's mesh
+*********************
+Object's mesh is important for object detection in ORK. Object's mesh mush be in format .stl/obj.
+
+You can prepare your object's mesh by following the ORK's capture procedure (very well explained in Quick Guide). Otherwise, you can use any software that allows mesh creation to prepare your mesh. Or you can use meshes that are free on the internet.
+
+Once you have your mesh, make sure it have the right size and note it's origin point before you upload it onto the DB. As in the following snapshot of blender's screen, you can see that the coke's mesh has a different position to the origin point than the bottle's mesh.
+
+.. image:: blender_coke_bottle_pos.png
+   :width: 100%
+   
+In ORK, object's position returned by ORK is the position of the origin point of the object's mesh.
+
 
 Creating an object in the DB
 ****************************
