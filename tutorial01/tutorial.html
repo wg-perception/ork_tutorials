@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Object Recognition DB &mdash; object_recognition_tutorials</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="object_recognition_tutorials" href="../index.html" />
+    <link rel="next" title="Object Recognition Using Tabletop" href="../tutorial02/tutorial.html" />
+    <link rel="prev" title="Object Recognition Tutorials" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../tutorial02/tutorial.html" title="Object Recognition Using Tabletop"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Object Recognition Tutorials"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">object_recognition_tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Object Recognition DB</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#prepare-object-s-mesh">Prepare object&#8217;s mesh</a></li>
+<li><a class="reference internal" href="#creating-an-object-in-the-db">Creating an object in the DB</a></li>
+<li><a class="reference internal" href="#manually-adding-a-mesh-for-the-object">Manually adding a mesh for the object</a></li>
+<li><a class="reference internal" href="#visualizing-the-object">Visualizing the object</a></li>
+<li><a class="reference internal" href="#deleting-an-object">Deleting an object</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Object Recognition Tutorials</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../tutorial02/tutorial.html"
+                        title="next chapter">Object Recognition Using Tabletop</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/tutorial01/tutorial.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="object-recognition-db">
+<span id="tutorial01"></span><h1>Object Recognition DB<a class="headerlink" href="#object-recognition-db" title="Permalink to this headline">¶</a></h1>
+<p>In the Object Recognition Kitchen, everything is stored in a database: objects, models, training data. We&#8217;ll walk you through the basics of the DB in this tutorial, you will:</p>
+<blockquote>
+<div><ul class="simple">
+<li>preparing object&#8217;s mesh to add to the DB</li>
+<li>learn how to manually add an object to the DB</li>
+<li>visualize data in the <tt class="docutils literal"><span class="pre">ORK</span></tt> DB</li>
+</ul>
+</div></blockquote>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Make sure you followed the steps in the core <a class="reference external" href="http://wg-perception.github.com/object_recognition_core/infrastructure/couch.html#object-recognition-core-db" title="(in object_recognition_core v)"><em class="xref std std-ref">DB instructions</em></a>, especially to get the 3d visualizer in the DB.</p>
+<p>The example we will use is a can of Coke as it&#8217;s somewhat universal :) For real life experiments, just get the iconic red can and there should not be too many appearance changes.</p>
+</div>
+<div class="section" id="prepare-object-s-mesh">
+<h2>Prepare object&#8217;s mesh<a class="headerlink" href="#prepare-object-s-mesh" title="Permalink to this headline">¶</a></h2>
+<p>Object&#8217;s mesh is important for object detection in ORK. Object&#8217;s mesh mush be in format .stl/obj.</p>
+<p>You can prepare your object&#8217;s mesh by following the ORK&#8217;s capture procedure (very well explained in Quick Guide). Otherwise, you can use any software that allows mesh creation to prepare your mesh. Or you can use meshes that are free on the internet.</p>
+<p>Once you have your mesh, make sure it have the right size and note it&#8217;s origin point before you upload it onto the DB. As in the following snapshot of blender&#8217;s screen, you can see that the coke&#8217;s mesh has a different position to the origin point than the bottle&#8217;s mesh.</p>
+<a class="reference internal image-reference" href="../_images/blender_coke_bottle_pos.png"><img alt="../_images/blender_coke_bottle_pos.png" src="../_images/blender_coke_bottle_pos.png" style="width: 100%;" /></a>
+<p>In ORK, object&#8217;s position returned by ORK is the position of the origin point of the object&#8217;s mesh.</p>
+</div>
+<div class="section" id="creating-an-object-in-the-db">
+<h2>Creating an object in the DB<a class="headerlink" href="#creating-an-object-in-the-db" title="Permalink to this headline">¶</a></h2>
+<p>ORK is about recognizing objects so you need to store objects in the DB first. Some pipelines like <a class="reference external" href="http://wg-perception.github.com/capture/index.html#ork-capture" title="(in object_recognition_capture v0.1.0)"><em class="xref std std-ref">ORK 3d capture</em></a> have an interface to create those for you. But you can also do it with the scripts from the core.</p>
+<div class="container">
+<button class="toggleable_button label_Non-ROS" onclick="
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+toggle('Non-ROS')">Non-ROS</button>
+<script>
+
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+
+$(document).ready(function() {
+  var classList =$('.toggleable_button').attr('class').split(/\s+/);
+  $.each( classList, function(index, item){
+    if (item.substring(0, 5) === 'label') {
+      toggle(item.substring(6));
+    };
+  });
+});
+</script>
+<button class="toggleable_button label_ROS" onclick="
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+toggle('ROS')">ROS</button>
+<script>
+
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+
+$(document).ready(function() {
+  var classList =$('.toggleable_button').attr('class').split(/\s+/);
+  $.each( classList, function(index, item){
+    if (item.substring(0, 5) === 'label') {
+      toggle(item.substring(6));
+    };
+  });
+});
+</script>
+</div>
+<div class="container">
+<div class="toggleable_div label_Non-ROS"><div class="highlight-sh"><div class="highlight"><pre>./ork_core/apps/dbscripts/object_add.py -n coke -d <span class="s2">&quot;A universal can of coke&quot;</span>
+</pre></div>
+</div>
+</div></div>
+<div class="container">
+<div class="toggleable_div label_ROS"><div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core object_add.py -n coke -d <span class="s2">&quot;A universal can of coke&quot;</span>
+</pre></div>
+</div>
+</div></div>
+<p>You can then check this object in the DB by going to <a class="reference external" href="http://localhost:5984/_utils/database.html?object_recognition/_design/objects/_view/by_object_name">http://localhost:5984/_utils/database.html?object_recognition/_design/objects/_view/by_object_name</a></p>
+<a class="reference internal image-reference" href="../_images/db_screenshot01.png"><img alt="../_images/db_screenshot01.png" src="../_images/db_screenshot01.png" style="width: 100%;" /></a>
+<p>If you click on it, you can see the info you entered about the object, especially the object id:</p>
+<a class="reference internal image-reference" href="../_images/db_screenshot02.png"><img alt="../_images/db_screenshot02.png" src="../_images/db_screenshot02.png" style="width: 100%;" /></a>
+</div>
+<div class="section" id="manually-adding-a-mesh-for-the-object">
+<h2>Manually adding a mesh for the object<a class="headerlink" href="#manually-adding-a-mesh-for-the-object" title="Permalink to this headline">¶</a></h2>
+<p>First, check out the object id of your object using the DB interface: each element of the DB (objects included) has its own hash as a unique identifier (in case you give the same name to different objects) and that is how you should refer to objects. To upload the mesh (use an .stl/.obj one):</p>
+<div class="container">
+<button class="toggleable_button label_Non-ROS" onclick="
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+toggle('Non-ROS')">Non-ROS</button>
+<script>
+
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+
+$(document).ready(function() {
+  var classList =$('.toggleable_button').attr('class').split(/\s+/);
+  $.each( classList, function(index, item){
+    if (item.substring(0, 5) === 'label') {
+      toggle(item.substring(6));
+    };
+  });
+});
+</script>
+<button class="toggleable_button label_ROS" onclick="
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+toggle('ROS')">ROS</button>
+<script>
+
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+
+$(document).ready(function() {
+  var classList =$('.toggleable_button').attr('class').split(/\s+/);
+  $.each( classList, function(index, item){
+    if (item.substring(0, 5) === 'label') {
+      toggle(item.substring(6));
+    };
+  });
+});
+</script>
+</div>
+<div class="container">
+<div class="toggleable_div label_Non-ROS"><div class="highlight-sh"><div class="highlight"><pre>./ork_core/apps/dbscripts/mesh_add.py YOUR_OBJECT_ID YOUR_COKE_BLEND_PATH --commit
+</pre></div>
+</div>
+</div></div>
+<div class="container">
+<div class="toggleable_div label_ROS"><div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core mesh_add.py YOUR_OBJECT_ID <span class="sb">`</span>rospack find object_recognition_tutorials<span class="sb">`</span>/data/coke.obj --commit
+</pre></div>
+</div>
+</div></div>
+</div>
+<div class="section" id="visualizing-the-object">
+<h2>Visualizing the object<a class="headerlink" href="#visualizing-the-object" title="Permalink to this headline">¶</a></h2>
+<p>Now, if you want to visualize the object in the db, you can just go to the visualization URL at <a class="reference external" href="http://localhost:5984/or_web_ui/_design/viewer/meshes.html">http://localhost:5984/or_web_ui/_design/viewer/meshes.html</a> and you should see the following:</p>
+<a class="reference internal image-reference" href="../_images/db_screenshot03.png"><img alt="../_images/db_screenshot03.png" src="../_images/db_screenshot03.png" style="width: 100%;" /></a>
+</div>
+<div class="section" id="deleting-an-object">
+<h2>Deleting an object<a class="headerlink" href="#deleting-an-object" title="Permalink to this headline">¶</a></h2>
+<p>You also have a method to delete an object (it will delete all other elements in the database like models/training data from it too).</p>
+<div class="container">
+<button class="toggleable_button label_Non-ROS" onclick="
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+toggle('Non-ROS')">Non-ROS</button>
+<script>
+
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+
+$(document).ready(function() {
+  var classList =$('.toggleable_button').attr('class').split(/\s+/);
+  $.each( classList, function(index, item){
+    if (item.substring(0, 5) === 'label') {
+      toggle(item.substring(6));
+    };
+  });
+});
+</script>
+<button class="toggleable_button label_ROS" onclick="
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+toggle('ROS')">ROS</button>
+<script>
+
+function toggle(label) {
+  $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
+  $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
+  $('.toggleable_div').css('display', 'none');
+  $('.toggleable_div.label_' + label).css('display', 'block');
+};
+
+$(document).ready(function() {
+  var classList =$('.toggleable_button').attr('class').split(/\s+/);
+  $.each( classList, function(index, item){
+    if (item.substring(0, 5) === 'label') {
+      toggle(item.substring(6));
+    };
+  });
+});
+</script>
+</div>
+<div class="container">
+<div class="toggleable_div label_Non-ROS"><div class="highlight-sh"><div class="highlight"><pre>./ork_core/apps/dbscripts/object_delete.py OBJECT_ID
+</pre></div>
+</div>
+</div></div>
+<div class="container">
+<div class="toggleable_div label_ROS"><div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core object_delete.py OBJECT_ID
+</pre></div>
+</div>
+</div></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../tutorial02/tutorial.html" title="Object Recognition Using Tabletop"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Object Recognition Tutorials"
+             >previous</a> |</li>
+        <li><a href="../index.html">object_recognition_tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013,  Willow Garage, Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

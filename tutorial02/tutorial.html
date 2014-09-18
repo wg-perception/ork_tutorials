@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Object Recognition Using Tabletop &mdash; object_recognition_tutorials</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="object_recognition_tutorials" href="../index.html" />
+    <link rel="prev" title="Object Recognition DB" href="../tutorial01/tutorial.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../tutorial01/tutorial.html" title="Object Recognition DB"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">object_recognition_tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Object Recognition Using Tabletop</a><ul>
+<li><a class="reference internal" href="#setup-the-working-environment">Setup the working environment</a><ul>
+<li><a class="reference internal" href="#hardware">Hardware</a></li>
+<li><a class="reference internal" href="#software">Software</a></li>
+<li><a class="reference internal" href="#configuring-the-3d-camera-and-rviz-parameters">Configuring the 3D camera and <tt class="docutils literal"><span class="pre">RViz</span></tt> parameters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#finding-planes">Finding planes</a></li>
+<li><a class="reference internal" href="#finding-objects">Finding objects</a></li>
+<li><a class="reference internal" href="#f-a-q">F.A.Q.</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../tutorial01/tutorial.html"
+                        title="previous chapter">Object Recognition DB</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/tutorial02/tutorial.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="object-recognition-using-tabletop">
+<span id="tutorial02"></span><h1>Object Recognition Using Tabletop<a class="headerlink" href="#object-recognition-using-tabletop" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://wg-perception.github.com/tabletop/index.html#tabletop" title="(in object_recognition_tabletop v)"><em class="xref std std-ref">Tabletop</em></a> is a simple pipeline for object recognition that only requires the mesh of an object for training/detection.</p>
+<p>Through this tutorial, you will:</p>
+<blockquote>
+<div><ul class="simple">
+<li>learn how to use the <tt class="docutils literal"><span class="pre">tabletop</span></tt> pipeline to find planes</li>
+<li>learn how to use the <tt class="docutils literal"><span class="pre">tabletop</span></tt> pipeline to find certain kinds of objects</li>
+<li>use the <tt class="docutils literal"><span class="pre">ORK</span></tt> RViz plugins</li>
+</ul>
+</div></blockquote>
+<p>Let&#8217;s first set up the working environment together!</p>
+<div class="section" id="setup-the-working-environment">
+<h2>Setup the working environment<a class="headerlink" href="#setup-the-working-environment" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hardware">
+<h3>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>To see tabletop in action, we will need to have</dt>
+<dd><ul class="first last simple">
+<li>a 3D camera (such as a Kinect, a Xtion),
+* a computer that can run ROS, * some plane surfaces (such as a table, a
+wall, or the ground under your feet ;-) ),
+* and optionally, some COKE can if you want to test the object detection feature of ORK_tabletop :-)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="software">
+<h3>Software<a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h3>
+<p>We need to have ORK installed on the computer. Installation of ORK is quite easy and clearly explained in <a class="reference external" href="http://wg-perception.github.com/object_recognition_core/install.html#install" title="(in object_recognition_core v)"><em class="xref std std-ref">here</em></a>. We need <tt class="docutils literal"><span class="pre">rqt_reconfigure</span></tt> and <tt class="docutils literal"><span class="pre">RViz</span></tt> to configure the 3D camera and visualize the detected planes and objects. To install those tools, just run the following command:</p>
+<div class="highlight-sh"><div class="highlight"><pre>sudo apt-get install ros-&lt;your ROS distro&gt;-rviz ros-&lt;your ROS distro&gt;-rqt_reconfigure ros-&lt;your ROS distro&gt;-openni*
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuring-the-3d-camera-and-rviz-parameters">
+<h3>Configuring the 3D camera and <tt class="docutils literal"><span class="pre">RViz</span></tt> parameters<a class="headerlink" href="#configuring-the-3d-camera-and-rviz-parameters" title="Permalink to this headline">¶</a></h3>
+<p>In separate terminals, run the following commands:</p>
+<div class="highlight-sh"><div class="highlight"><pre>roslaunch openni2_launch openni2.launch rosrun rviz rviz
+</pre></div>
+</div>
+<p>Set the Fixed Frame (top left of the <tt class="docutils literal"><span class="pre">RViz</span></tt> window) to <tt class="docutils literal"><span class="pre">/camera_depth_optical_frame</span></tt>. Add a PointCloud2 display, and set the topic to <tt class="docutils literal"><span class="pre">/camera/depth/points</span></tt>. Turning the background to light gray can help with viewing. This is the unregistered point cloud in the frame of the depth (IR) camera. It is not matched with the RGB camera images. Now let&#8217;s look at a registered point cloud, aligned with the RGB data. Open the dynamic reconfigure GUI:</p>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun rqt_reconfigure rqt_reconfigure
+</pre></div>
+</div>
+<p>And select <tt class="docutils literal"><span class="pre">/camera/driver</span></tt> from the drop-down menu. Enable the <tt class="docutils literal"><span class="pre">depth_registration</span></tt> checkbox. Now go back to <tt class="docutils literal"><span class="pre">RViz</span></tt>, and change your PointCloud2 topic to <tt class="docutils literal"><span class="pre">/camera/depth_registered/points</span></tt>. Set Color Transformer to RGB8. You should see a color, 3D point cloud of your scene.</p>
+<p>(Detailed explanation can be found here: <a class="reference external" href="http://wiki.ros.org/openni2_launch">http://wiki.ros.org/openni2_launch</a>)</p>
+</div>
+</div>
+<div class="section" id="finding-planes">
+<h2>Finding planes<a class="headerlink" href="#finding-planes" title="Permalink to this headline">¶</a></h2>
+<p>In order to find planes using ORK_Tabletop, run the following command:</p>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core detection -c <span class="sb">`</span>rospack find object_recognition_tabletop<span class="sb">`</span>/conf/detection.table.ros.ork
+</pre></div>
+</div>
+<p>Then go to <tt class="docutils literal"><span class="pre">RViz</span></tt> graphical window, and add the OrkTable display. Now you should see some planes detected by ORK_Tabletop if your camera is pointing to some plane surfaces.</p>
+<a class="reference internal image-reference" href="../_images/orktables.png"><img alt="../_images/orktables.png" src="../_images/orktables.png" style="width: 100%;" /></a>
+</div>
+<div class="section" id="finding-objects">
+<h2>Finding objects<a class="headerlink" href="#finding-objects" title="Permalink to this headline">¶</a></h2>
+<p>If you follow the installation guide (<a class="reference external" href="http://wg-perception.github.io/object_recognition_core/install.html#install">http://wg-perception.github.io/object_recognition_core/install.html#install</a>), you know that ORK uses couchDB to manage the objects database. In order to have tabletop detect objects, we need to feed the databases with objects&#8217; 3D models.</p>
+<p>When you first installed ORK, my database was empty. Luckily, ork tutorials comes with 3D model of a coke can. So, download the tutorials:</p>
+<div class="highlight-sh"><div class="highlight"><pre>git clone https://github.com/wg-perception/ork_tutorials
+</pre></div>
+</div>
+<p>then uploaded it to the ORK database:</p>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core object_add.py -n <span class="s2">&quot;coke &quot;</span> -d <span class="s2">&quot;A universal can of coke&quot;</span> rosrun object_recognition_core mesh_add.py &lt;the object id that previous <span class="nb">command </span>returned&gt; &lt;path to the ork_tutorials/data/coke.stl&gt;
+</pre></div>
+</div>
+<p>If you also did these steps to upload objects, then when opening the link <a class="reference external" href="http://localhost:5984/or_web_ui/_design/viewer/objects.html">http://localhost:5984/or_web_ui/_design/viewer/objects.html</a> you should see the coke object listed in your database.</p>
+<p>As everything is set up; let&#8217;s see how ork_tabletop detects our coke can. In a terminal, run</p>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun object_reconition_core detection -c  <span class="sb">`</span>rospack find object_recognition_tabletop<span class="sb">`</span>/conf/detection.object.ros.ork<span class="sb">`</span>
+</pre></div>
+</div>
+<p>Go back to <tt class="docutils literal"><span class="pre">RViz</span></tt> , and add the <tt class="docutils literal"><span class="pre">OrkObject</span></tt> display. Now if you have a coke can placed on one of the detected planes, ork_tabletop should see it and your beautiful <tt class="docutils literal"><span class="pre">RViz</span></tt> interface should be displaying it, like this:</p>
+<a class="reference internal image-reference" href="../_images/orkCoke.png"><img alt="../_images/orkCoke.png" src="../_images/orkCoke.png" style="width: 100%;" /></a>
+<p><strong>Notice:</strong> In the image, you only see the coke because OrkTable is unchecked in <tt class="docutils literal"><span class="pre">RViz</span></tt> interface. This should not be the case on your beautiful <tt class="docutils literal"><span class="pre">RViz</span></tt> unless you actually uncheck that box ;-)</p>
+</div>
+<div class="section" id="f-a-q">
+<h2>F.A.Q.<a class="headerlink" href="#f-a-q" title="Permalink to this headline">¶</a></h2>
+<p><strong>Problem:</strong> ORK_tabletop complained about the 3D inputs or seems to wait for ROS topic forever. Why?</p>
+<p><strong>Answer:</strong> That happened to me a couple of times, too. That may be because ORK_Tabletop is not listening to the topics that the 3D camera is publishing. Just open the configuration file called in the detection command and check if the default topics are the same as what are published by the 3D camera. If that&#8217;s not the case, just uncomment the parameter option and modify these topics accordingly. And hopefully, tabletop would be happy with this modification and show off its power the next time you run it.</p>
+<p>Now that you see things on the <tt class="docutils literal"><span class="pre">RViz</span></tt>, why don&#8217;t you just move the 3D camera around to see how fast ORK_tabletop detects thing? ;-)</p>
+<p>Have fun exploring!</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../tutorial01/tutorial.html" title="Object Recognition DB"
+             >previous</a> |</li>
+        <li><a href="../index.html">object_recognition_tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013,  Willow Garage, Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
