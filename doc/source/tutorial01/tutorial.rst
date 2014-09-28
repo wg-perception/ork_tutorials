@@ -34,18 +34,14 @@ Creating an object in the DB
 ****************************
 
 ORK is about recognizing objects so you need to store objects in the DB first. Some pipelines like :ref:`ORK 3d capture <orkcapture:ork_capture>` have an interface to create those for you. But you can also do it with the scripts from the core.
-
-.. toggle_table::
-   :arg1: Non-ROS
-   :arg2: ROS
-
-.. toggle:: Non-ROS
+ 
+ * With python script:
 
    .. code-block:: sh
    
       ./ork_core/apps/dbscripts/object_add.py -n coke -d "A universal can of coke"
    
-.. toggle:: ROS
+ * Or with ROS:
 
    .. code-block:: sh
    
@@ -67,17 +63,13 @@ Manually adding a mesh for the object
 
 First, check out the object id of your object using the DB interface: each element of the DB (objects included) has its own hash as a unique identifier (in case you give the same name to different objects) and that is how you should refer to objects. To upload the mesh (use an .stl/.obj one):
 
-.. toggle_table::
-   :arg1: Non-ROS
-   :arg2: ROS
-
-.. toggle:: Non-ROS
+ * With python script
 
    .. code-block:: sh
    
       ./ork_core/apps/dbscripts/mesh_add.py YOUR_OBJECT_ID YOUR_COKE_BLEND_PATH --commit
 
-.. toggle:: ROS
+ * Or with ROS:
 
    .. code-block:: sh
    
@@ -98,18 +90,13 @@ Deleting an object
 
 You also have a method to delete an object (it will delete all other elements in the database like models/training data from it too).
 
-
-.. toggle_table::
-   :arg1: Non-ROS
-   :arg2: ROS
-   
-.. toggle:: Non-ROS
-
+ * With python script:
+ 
    .. code-block:: sh
 
       ./ork_core/apps/dbscripts/object_delete.py OBJECT_ID
 
-.. toggle:: ROS
+ * Or with ROS:
 
    .. code-block:: sh
 
