@@ -3,7 +3,6 @@ project(object_recognition_tutorials)
 
 find_package(catkin)
 
-find_package(catkin)
 catkin_package()
 
 # build the docs

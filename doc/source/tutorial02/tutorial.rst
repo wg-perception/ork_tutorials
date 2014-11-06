@@ -22,9 +22,8 @@ Hardware
 
 To see tabletop in action, we will need to have
   * a 3D camera (such as a Kinect, a Xtion),
-    * a computer that can run ROS, * some plane surfaces (such as a table, a
-    wall, or the ground under your feet ;-) ),
-    * and optionally, some COKE can if you want to test the object detection feature of ORK_tabletop :-)
+  * a computer that can run ROS, * some plane surfaces (such as a table, a wall, or the ground under your feet ;-) ),
+  * and optionally, some COKE can if you want to test the object detection feature of ORK_tabletop :-)
 
 Software
 ========
@@ -42,7 +41,8 @@ In separate terminals, run the following commands:
 
 .. code-block:: sh
 
-    roslaunch openni2_launch openni2.launch rosrun rviz rviz
+    roslaunch openni2_launch openni2.launch
+    rosrun rviz rviz
     
 Set the Fixed Frame (top left of the ``RViz`` window) to ``/camera_depth_optical_frame``. Add a PointCloud2 display, and set the topic to ``/camera/depth/points``. Turning the background to light gray can help with viewing. This is the unregistered point cloud in the frame of the depth (IR) camera. It is not matched with the RGB camera images. Now let's look at a registered point cloud, aligned with the RGB data. Open the dynamic reconfigure GUI:
 
@@ -86,7 +86,8 @@ then uploaded it to the ORK database:
 
 .. code-block:: sh
 
-    rosrun object_recognition_core object_add.py -n "coke " -d "A universal can of coke" rosrun object_recognition_core mesh_add.py <the object id that previous command returned> <path to the ork_tutorials/data/coke.stl>
+    rosrun object_recognition_core object_add.py -n "coke " -d "A universal can of coke"
+    rosrun object_recognition_core mesh_add.py <the object id that previous command returned> <path to the ork_tutorials/data/coke.stl>
 
 If you also did these steps to upload objects, then when opening the link http://localhost:5984/or_web_ui/_design/viewer/objects.html you should see the coke object listed in your database.
 
@@ -95,7 +96,7 @@ As everything is set up; let's see how ork_tabletop detects our coke can. In a t
 
 .. code-block:: sh
 
-    rosrun object_reconition_core detection -c  `rospack find object_recognition_tabletop`/conf/detection.object.ros.ork`
+    rosrun object_recognition_core detection -c  `rospack find object_recognition_tabletop`/conf/detection.object.ros.ork`
     
 Go back to ``RViz`` , and add the ``OrkObject`` display. Now if you have a coke can placed on one of the detected planes, ork_tabletop should see it and your beautiful ``RViz`` interface should be displaying it, like this:
 
