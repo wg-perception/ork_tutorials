@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Object Recognition Using Linemod &mdash; object_recognition_tutorials</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="object_recognition_tutorials" href="../index.html" />
+    <link rel="prev" title="Object Recognition Using Tabletop" href="../tutorial02/tutorial.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../tutorial02/tutorial.html" title="Object Recognition Using Tabletop"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">object_recognition_tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Object Recognition Using Linemod</a><ul>
+<li><a class="reference internal" href="#setup-the-working-environment">Setup the working environment</a><ul>
+<li><a class="reference internal" href="#hardware">Hardware</a></li>
+<li><a class="reference internal" href="#software">Software</a></li>
+<li><a class="reference internal" href="#configuring-the-3d-camera-and-rviz-parameters">Configuring the 3D camera and <tt class="docutils literal"><span class="pre">RViz</span></tt> parameters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#object-detection">Object detection</a><ul>
+<li><a class="reference internal" href="#setup-the-object-database">Setup the object database</a></li>
+<li><a class="reference internal" href="#training">Training</a></li>
+<li><a class="reference internal" href="#detection">Detection</a></li>
+<li><a class="reference internal" href="#visualization-with-rviz">Visualization with RViz</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../tutorial02/tutorial.html"
+                        title="previous chapter">Object Recognition Using Tabletop</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/tutorial03/tutorial.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="object-recognition-using-linemod">
+<span id="tutorial03"></span><h1>Object Recognition Using Linemod<a class="headerlink" href="#object-recognition-using-linemod" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://wg-perception.github.com/linemod/index.html#line-mod" title="(in object_recognition_linemod v)"><em class="xref std std-ref">Linemod</em></a> is a pipeline that implements one of the best methods for generic rigid object recognition and it proceeds using very fast template matching. For more information, check the LINE-MOD approach from <a class="reference external" href="http://ar.in.tum.de/Main/StefanHinterstoisser">http://ar.in.tum.de/Main/StefanHinterstoisser</a>.</p>
+<p>Through this tutorial, you will:</p>
+<blockquote>
+<div><ul class="simple">
+<li>learn how to use the <tt class="docutils literal"><span class="pre">linemod</span></tt> pipeline to learn objects</li>
+<li>learn how to use the <tt class="docutils literal"><span class="pre">linemod</span></tt> pipeline to detect objects</li>
+<li>use the <tt class="docutils literal"><span class="pre">ORK</span></tt> RViz plugins</li>
+</ul>
+</div></blockquote>
+<div class="section" id="setup-the-working-environment">
+<h2>Setup the working environment<a class="headerlink" href="#setup-the-working-environment" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hardware">
+<h3>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>To see Linemod in action, we will need to have</dt>
+<dd><ul class="first last simple">
+<li>a 3D camera (such as a Kinect or a Xtion),</li>
+<li>a PC with ROS installed,</li>
+<li>and optionally, some CAN to test the object detection</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="software">
+<h3>Software<a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h3>
+<p>You need to have ORK installed on the computer. Installation of ORK is quite easy and clearly explained in <a class="reference external" href="http://wg-perception.github.com/object_recognition_core/install.html#install" title="(in object_recognition_core v)"><em class="xref std std-ref">here</em></a>. We need <tt class="docutils literal"><span class="pre">rqt_reconfigure</span></tt> and <tt class="docutils literal"><span class="pre">RViz</span></tt> to configure the 3D camera and visualize the detected objects. To install those tools, just run the following command:</p>
+<div class="highlight-sh"><div class="highlight"><pre>sudo apt-get install ros-&lt;your ROS distro&gt;-rviz ros-&lt;your ROS distro&gt;-rqt_reconfigure ros-&lt;your ROS distro&gt;-openni*
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuring-the-3d-camera-and-rviz-parameters">
+<h3>Configuring the 3D camera and <tt class="docutils literal"><span class="pre">RViz</span></tt> parameters<a class="headerlink" href="#configuring-the-3d-camera-and-rviz-parameters" title="Permalink to this headline">¶</a></h3>
+<p>At first, launch the OpenNI driver:</p>
+<div class="highlight-sh"><div class="highlight"><pre>roslaunch openni2_launch openni2.launch
+</pre></div>
+</div>
+<p>Run RViz</p>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun rviz rviz
+</pre></div>
+</div>
+<p>Set the Fixed Frame (in Global Options, <tt class="docutils literal"><span class="pre">Displays</span></tt> window) to <tt class="docutils literal"><span class="pre">/camera_depth_optical_frame</span></tt>. Add a PointCloud2 display and set the topic to <tt class="docutils literal"><span class="pre">/camera/depth/points</span></tt>.  This is the unregistered point cloud in the frame of the depth (IR) camera and it is not matched with the RGB camera images.
+For visualization of the registered point cloud, the depth data could be aligned with the RGB data. To do it, launch the dynamic reconfigure GUI:</p>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun rqt_reconfigure rqt_reconfigure
+</pre></div>
+</div>
+<p>Select <tt class="docutils literal"><span class="pre">/camera/driver</span></tt> from the drop-down menu and enable the <tt class="docutils literal"><span class="pre">depth_registration</span></tt> checkbox.
+In <tt class="docutils literal"><span class="pre">RViz</span></tt>, change the PointCloud2 topic to <tt class="docutils literal"><span class="pre">/camera/depth_registered/points</span></tt> and set the Color Transformer to <tt class="docutils literal"><span class="pre">RGB8</span></tt> to see both color and 3D point cloud of your scene.
+The detailed explanation can be found here: <a class="reference external" href="http://wiki.ros.org/openni2_launch">http://wiki.ros.org/openni2_launch</a>.</p>
+</div>
+</div>
+<div class="section" id="object-detection">
+<h2>Object detection<a class="headerlink" href="#object-detection" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setup-the-object-database">
+<h3>Setup the object database<a class="headerlink" href="#setup-the-object-database" title="Permalink to this headline">¶</a></h3>
+<p>The Object Recognition Kitchen manages objects using <a class="reference external" href="http://wg-perception.github.com/object_recognition_core/infrastructure/couch.html#object-recognition-core-db" title="(in object_recognition_core v)"><em class="xref std std-ref">couchDB</em></a> database. Thus, in order to learn objects, you need to store their 3D models in the database first. You can check the detailed <a class="reference external" href="http://wg-perception.github.com/object_recognition_core/infrastructure/couch.html#object-recognition-core-db" title="(in object_recognition_core v)"><em class="xref std std-ref">DB tutorial</em></a> or the following brief explanation.</p>
+<p>When you install ORK, the database is empty. Luckily, ORK tutorials comes with a 3D mesh of a coke that can be downloaded here:</p>
+<div class="highlight-sh"><div class="highlight"><pre>git clone https://github.com/wg-perception/ork_tutorials
+</pre></div>
+</div>
+<p>You can upload the object and its mesh to the database with the scripts from the core:</p>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core object_add.py -n <span class="s2">&quot;coke &quot;</span> -d <span class="s2">&quot;A universal can of coke&quot;</span>
+rosrun object_recognition_core mesh_add.py &lt;YOUR_OBJECT_ID&gt; &lt;path to ork_tutorials/data/coke.stl&gt;
+</pre></div>
+</div>
+<p>Once uploaded, you can then check the object in the database by going to <a class="reference external" href="http://localhost:5984/_utils/database.html?object_recognition/_design/objects/_view/by_object_name">http://localhost:5984/_utils/database.html?object_recognition/_design/objects/_view/by_object_name</a></p>
+</div>
+<div class="section" id="training">
+<h3>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h3>
+<p>Now, you can learn objects models from the database. Execute the Linemod in the training mode with the configuration file through the <tt class="docutils literal"><span class="pre">-c</span></tt> option. The configuration file should define a pipeline that reads data from the database and computes objects models.</p>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core detection -c <span class="sb">`</span>rospack find object_recognition_linemod<span class="sb">`</span>/conf/training.ork<span class="sb">`</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="detection">
+<h3>Detection<a class="headerlink" href="#detection" title="Permalink to this headline">¶</a></h3>
+<p>Once learned, objects can be detected from the input point cloud. In order to detect object continuously, execute the Linemod in the detection mode with the configuration file that defines a source, a sink, and a pipeline, as explained in <a class="reference external" href="http://wg-perception.github.io/object_recognition_core/detection/detection.html">http://wg-perception.github.io/object_recognition_core/detection/detection.html</a>.</p>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core detection -c  <span class="sb">`</span>rospack find object_recognition_linemod<span class="sb">`</span>/conf/detection.ros.ork<span class="sb">`</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualization-with-rviz">
+<h3>Visualization with RViz<a class="headerlink" href="#visualization-with-rviz" title="Permalink to this headline">¶</a></h3>
+<p>Now, go to <tt class="docutils literal"><span class="pre">RViz</span></tt> and add the <tt class="docutils literal"><span class="pre">OrkObject</span></tt> in the <tt class="docutils literal"><span class="pre">Displays</span></tt> window. Select the <tt class="docutils literal"><span class="pre">OrkObject</span></tt> topic and the parameters to display: object id, name, and confidence.
+Here, we show an example of detecting two objects (a coke and a head of NAO) and the outcome visualized in RViz:</p>
+<a class="reference internal image-reference" href="../_images/Screenshot_2014_11_07_13_24_46.png"><img alt="../_images/Screenshot_2014_11_07_13_24_46.png" src="../_images/Screenshot_2014_11_07_13_24_46.png" style="width: 100%;" /></a>
+<p>You can also visualize the point clouds of a matched object models and its model from the database.
+Here, we visualize the point cloud of the object model. It is published as a PointClouds2 marker (named <tt class="docutils literal"><span class="pre">pc_model</span></tt>).  The point cloud is transformed according to the object pose detected by the Linemod and refined by post-processing based on ICP.</p>
+<a class="reference internal image-reference" href="../_images/Screenshot_pc_model.png"><img alt="../_images/Screenshot_pc_model.png" src="../_images/Screenshot_pc_model.png" style="width: 100%;" /></a>
+<p>Here, we visualize the matched point cloud from the sensor. It is published as a PointClouds2 marker (named <tt class="docutils literal"><span class="pre">pc_ref</span></tt>) without any additional transformation.</p>
+<a class="reference internal image-reference" href="../_images/Screenshot_pc_ref.png"><img alt="../_images/Screenshot_pc_ref.png" src="../_images/Screenshot_pc_ref.png" style="width: 100%;" /></a>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../tutorial02/tutorial.html" title="Object Recognition Using Tabletop"
+             >previous</a> |</li>
+        <li><a href="../index.html">object_recognition_tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013,  Willow Garage, Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

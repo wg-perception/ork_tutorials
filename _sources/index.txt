@@ -12,3 +12,4 @@ The following tutorials do not go over the object recognition steps in order of 
 
    ./tutorial01/tutorial.rst
    ./tutorial02/tutorial.rst
+   ./tutorial03/tutorial.rst

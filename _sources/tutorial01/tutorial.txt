@@ -18,7 +18,7 @@ The example we will use is a can of Coke as it's somewhat universal :) For real 
 
 Prepare object's mesh
 *********************
-Object's mesh is important for object detection in ORK. Object's mesh mush be in format .stl/obj.
+Object's mesh is important for object detection in ORK. Object's mesh must be in format .stl/obj.
 
 You can prepare your object's mesh by following the ORK's capture procedure (very well explained in Quick Guide). Otherwise, you can use any software that allows mesh creation to prepare your mesh. Or you can use meshes that are free on the internet.
 
