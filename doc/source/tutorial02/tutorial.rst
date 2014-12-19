@@ -96,7 +96,7 @@ As everything is set up; let's see how ork_tabletop detects our coke can. In a t
 
 .. code-block:: sh
 
-    rosrun object_reconition_core detection -c  `rospack find object_recognition_tabletop`/conf/detection.object.ros.ork`
+    rosrun object_recognition_core detection -c  `rospack find object_recognition_tabletop`/conf/detection.object.ros.ork`
     
 Go back to ``RViz`` , and add the ``OrkObject`` display. Now if you have a coke can placed on one of the detected planes, ork_tabletop should see it and your beautiful ``RViz`` interface should be displaying it, like this:
 
