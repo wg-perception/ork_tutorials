@@ -226,6 +226,7 @@ rst_epilog = """
 
 intersphinx_mapping = {'orkcapture': ('http://wg-perception.github.com/capture', None),
                        'orkcore': ('http://wg-perception.github.com/object_recognition_core', None),
+                       'orklinemod': ('http://wg-perception.github.com/linemod', None),
                        'orkrenderer': ('http://wg-perception.github.com/ork_renderer', None),
                        'orktabletop': ('http://wg-perception.github.com/tabletop', None),
 }

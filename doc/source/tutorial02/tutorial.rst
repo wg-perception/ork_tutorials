@@ -22,7 +22,8 @@ Hardware
 
 To see tabletop in action, we will need to have
   * a 3D camera (such as a Kinect, a Xtion),
-  * a computer that can run ROS, * some plane surfaces (such as a table, a wall, or the ground under your feet ;-) ),
+  * a computer that can run ROS
+  * some plane surfaces (such as a table, a wall, or the ground under your feet ;-) )
   * and optionally, some COKE can if you want to test the object detection feature of ORK_tabletop :-)
 
 Software

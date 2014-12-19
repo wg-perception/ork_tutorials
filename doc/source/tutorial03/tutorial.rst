@@ -3,7 +3,7 @@
 Object Recognition Using Linemod
 #################################
 
-:ref:`Linemod <orklinemod:linemod>` is a pipeline that implements one of the best methods for generic rigid object recognition and it proceeds using very fast template matching. For more information, check the LINE-MOD approach from http://ar.in.tum.de/Main/StefanHinterstoisser. 
+:ref:`Linemod <orklinemod:line_mod>` is a pipeline that implements one of the best methods for generic rigid object recognition and it proceeds using very fast template matching. For more information, check the LINE-MOD approach from http://ar.in.tum.de/Main/StefanHinterstoisser.
 
 Through this tutorial, you will:
 
@@ -60,10 +60,10 @@ The detailed explanation can be found here: http://wiki.ros.org/openni2_launch.
 
 
 Object detection
-***************
+****************
 
 Setup the object database
-========
+=========================
 
 The Object Recognition Kitchen manages objects using :ref:`couchDB <orkcore:object_recognition_core_db>` database. Thus, in order to learn objects, you need to store their 3D models in the database first. You can check the detailed :ref:`DB tutorial <orkcore:object_recognition_core_db>` or the following brief explanation.
 
@@ -94,7 +94,7 @@ Now, you can learn objects models from the database. Execute the Linemod in the 
 
 
 Detection
-========
+=========
 
 Once learned, objects can be detected from the input point cloud. In order to detect object continuously, execute the Linemod in the detection mode with the configuration file that defines a source, a sink, and a pipeline, as explained in http://wg-perception.github.io/object_recognition_core/detection/detection.html.
 
@@ -104,7 +104,7 @@ Once learned, objects can be detected from the input point cloud. In order to de
 
 
 Visualization with RViz
-========
+=======================
     
 Now, go to ``RViz`` and add the ``OrkObject`` in the ``Displays`` window. Select the ``OrkObject`` topic and the parameters to display: object id, name, and confidence. 
 Here, we show an example of detecting two objects (a coke and a head of NAO) and the outcome visualized in RViz:
