@@ -161,7 +161,7 @@ rosrun object_recognition_core mesh_add.py &lt;YOUR_OBJECT_ID&gt; &lt;path to or
 <div class="section" id="training">
 <h3>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h3>
 <p>Now, you can learn objects models from the database. Execute the Linemod in the training mode with the configuration file through the <tt class="docutils literal"><span class="pre">-c</span></tt> option. The configuration file should define a pipeline that reads data from the database and computes objects models.</p>
-<div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core detection -c <span class="sb">`</span>rospack find object_recognition_linemod<span class="sb">`</span>/conf/training.ork<span class="sb">`</span>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core training -c <span class="sb">`</span>rospack find object_recognition_linemod<span class="sb">`</span>/conf/training.ork<span class="sb">`</span>
 </pre></div>
 </div>
 </div>
