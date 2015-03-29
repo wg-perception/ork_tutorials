@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(object_recognition_tutorials)
 
-find_package(catkin)
+find_package(catkin REQUIRED ecto)
 
 catkin_package()
 
