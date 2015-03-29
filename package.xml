@@ -1,6 +1,6 @@
 <package>
   <name>object_recognition_tutorials</name>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <description>A set of doc/data/scripts for the tutorials in the Object Recognition Kitchen</description>
   <author email="vincent.rabaud@gmail.com">Vincent Rabaud</author>
   <maintainer email="vincent.rabaud@gmail.com">Vincent Rabaud</maintainer>
