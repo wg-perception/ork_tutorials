@@ -161,14 +161,14 @@ rosrun object_recognition_core mesh_add.py &lt;YOUR_OBJECT_ID&gt; &lt;path to or
 <div class="section" id="training">
 <h3>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h3>
 <p>Now, you can learn objects models from the database. Execute the Linemod in the training mode with the configuration file through the <tt class="docutils literal"><span class="pre">-c</span></tt> option. The configuration file should define a pipeline that reads data from the database and computes objects models.</p>
-<div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core training -c <span class="sb">`</span>rospack find object_recognition_linemod<span class="sb">`</span>/conf/training.ork<span class="sb">`</span>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core training -c <span class="sb">`</span>rospack find object_recognition_linemod<span class="sb">`</span>/conf/training.ork
 </pre></div>
 </div>
 </div>
 <div class="section" id="detection">
 <h3>Detection<a class="headerlink" href="#detection" title="Permalink to this headline">¶</a></h3>
 <p>Once learned, objects can be detected from the input point cloud. In order to detect object continuously, execute the Linemod in the detection mode with the configuration file that defines a source, a sink, and a pipeline, as explained in <a class="reference external" href="http://wg-perception.github.io/object_recognition_core/detection/detection.html">http://wg-perception.github.io/object_recognition_core/detection/detection.html</a>.</p>
-<div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core detection -c  <span class="sb">`</span>rospack find object_recognition_linemod<span class="sb">`</span>/conf/detection.ros.ork<span class="sb">`</span>
+<div class="highlight-sh"><div class="highlight"><pre>rosrun object_recognition_core detection -c  <span class="sb">`</span>rospack find object_recognition_linemod<span class="sb">`</span>/conf/detection.ros.ork
 </pre></div>
 </div>
 </div>
@@ -206,7 +206,7 @@ Here, we visualize the point cloud of the object model. It is published as a Poi
     </div>
     <div class="footer">
         &copy; Copyright 2013,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

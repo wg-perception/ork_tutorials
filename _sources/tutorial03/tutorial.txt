@@ -90,7 +90,7 @@ Now, you can learn objects models from the database. Execute the Linemod in the 
 
 .. code-block:: sh
 
-    rosrun object_recognition_core training -c `rospack find object_recognition_linemod`/conf/training.ork`
+    rosrun object_recognition_core training -c `rospack find object_recognition_linemod`/conf/training.ork
 
 
 Detection
@@ -100,7 +100,7 @@ Once learned, objects can be detected from the input point cloud. In order to de
 
 .. code-block:: sh
 
-    rosrun object_recognition_core detection -c  `rospack find object_recognition_linemod`/conf/detection.ros.ork`
+    rosrun object_recognition_core detection -c  `rospack find object_recognition_linemod`/conf/detection.ros.ork
 
 
 Visualization with RViz
