@@ -177,11 +177,11 @@ rosrun object_recognition_core mesh_add.py &lt;YOUR_OBJECT_ID&gt; &lt;path to or
 <p>Now, go to <tt class="docutils literal"><span class="pre">RViz</span></tt> and add the <tt class="docutils literal"><span class="pre">OrkObject</span></tt> in the <tt class="docutils literal"><span class="pre">Displays</span></tt> window. Select the <tt class="docutils literal"><span class="pre">OrkObject</span></tt> topic and the parameters to display: object id, name, and confidence.
 Here, we show an example of detecting two objects (a coke and a head of NAO) and the outcome visualized in RViz:</p>
 <a class="reference internal image-reference" href="../_images/Screenshot_2014_11_07_13_24_46.png"><img alt="../_images/Screenshot_2014_11_07_13_24_46.png" src="../_images/Screenshot_2014_11_07_13_24_46.png" style="width: 100%;" /></a>
-<p>You can also visualize the point clouds of a matched object models and its model from the database.
-Here, we visualize the point cloud of the object model. It is published as a PointClouds2 marker (named <tt class="docutils literal"><span class="pre">pc_model</span></tt>).  The point cloud is transformed according to the object pose detected by the Linemod and refined by post-processing based on ICP.</p>
-<a class="reference internal image-reference" href="../_images/Screenshot_pc_model.png"><img alt="../_images/Screenshot_pc_model.png" src="../_images/Screenshot_pc_model.png" style="width: 100%;" /></a>
-<p>Here, we visualize the matched point cloud from the sensor. It is published as a PointClouds2 marker (named <tt class="docutils literal"><span class="pre">pc_ref</span></tt>) without any additional transformation.</p>
+<p>For each recognized object, you can visualize its point cloud and also a point cloud of the matching object from the database. For this, compile the package with the CMake option <tt class="docutils literal"><span class="pre">-DLINEMOD_VIZ_PCD=ON</span></tt>.
+Once an object is recognized, its point cloud from the sensor 3D data is visualized as shown in the following image (check blue color). The cloud is published under the <tt class="docutils literal"><span class="pre">/real_icpin_ref</span></tt> topic.</p>
 <a class="reference internal image-reference" href="../_images/Screenshot_pc_ref.png"><img alt="../_images/Screenshot_pc_ref.png" src="../_images/Screenshot_pc_ref.png" style="width: 100%;" /></a>
+<p>For the same recognized object, we can visualize the point cloud of the matching object from the database as shown in the following image (check yellow color). The point cloud is created from the mesh stored in the database by visualizing at a pose returned by Linemod and refined by ICP. The cloud is published under the <tt class="docutils literal"><span class="pre">/real_icpin_model</span></tt> topic.</p>
+<a class="reference internal image-reference" href="../_images/Screenshot_pc_model.png"><img alt="../_images/Screenshot_pc_model.png" src="../_images/Screenshot_pc_model.png" style="width: 100%;" /></a>
 </div>
 </div>
 </div>
