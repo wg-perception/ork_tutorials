@@ -112,15 +112,15 @@ Here, we show an example of detecting two objects (a coke and a head of NAO) and
 .. image:: Screenshot_2014_11_07_13_24_46.png
    :width: 100%
 
-You can also visualize the point clouds of a matched object models and its model from the database. 
-Here, we visualize the point cloud of the object model. It is published as a PointClouds2 marker (named ``pc_model``).  The point cloud is transformed according to the object pose detected by the Linemod and refined by post-processing based on ICP.   
-
-.. image:: Screenshot_pc_model.png
-   :width: 100%
-
-Here, we visualize the matched point cloud from the sensor. It is published as a PointClouds2 marker (named ``pc_ref``) without any additional transformation.   
+For each recognized object, you can visualize its point cloud and also a point cloud of the matching object from the database. For this, compile the package with the CMake option ``-DLINEMOD_VIZ_PCD=ON``. 
+Once an object is recognized, its point cloud from the sensor 3D data is visualized as shown in the following image (check blue color). The cloud is published under the ``/real_icpin_ref`` topic.   
 
 .. image:: Screenshot_pc_ref.png
+   :width: 100%
+
+For the same recognized object, we can visualize the point cloud of the matching object from the database as shown in the following image (check yellow color). The point cloud is created from the mesh stored in the database by visualizing at a pose returned by Linemod and refined by ICP. The cloud is published under the ``\real_icpin_model`` topic.
+
+.. image:: Screenshot_pc_model.png
    :width: 100%
 
 
