@@ -31,9 +31,9 @@ Software
 ========
 
 You need to have ORK installed on the computer. If you have completed the
-:ref:`Getting Started Guide <orkcore:getting_started>`_, then you are good to go.
+:ref:`Getting Started Guide <orkcore:getting_started>`, then you are good to go.
 You can also find detailed installation instructions at the
-:ref:`Installation page <orkcore:installation>`_.
+:ref:`Installation page <orkcore:installation>`.
 
 Configuring the 3D camera and ``RViz`` parameters
 =================================================
@@ -81,7 +81,7 @@ Setup the object database
 Your database must have an object loaded into it to perform detection. If you've
 done the Getting Started guide, you already have the soda can model in your
 database, and you can skip this step. If not, go to the
-:ref:`Getting Started Guide <orkcore:getting_started>`_ and complete steps 4 and
+:ref:`Getting Started Guide <orkcore:getting_started>` and complete steps 4 and
 5.
 
 Training
