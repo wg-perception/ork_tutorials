@@ -32,7 +32,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.doctest',
               'sphinx.ext.graphviz',
               'sphinx.ext.intersphinx',
-              'sphinx.ext.pngmath',
+              'sphinx.ext.imgmath',
               'sphinx.ext.todo',
               'sphinx.ext.viewcode']
 
@@ -113,7 +113,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.
-html_theme = 'ecto_theme'
+html_theme = 'sphinxdoc'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -223,9 +223,9 @@ rst_epilog = """
 
 """
 
-intersphinx_mapping = {'orkcapture': ('http://wg-perception.github.com/capture', None),
-                       'orkcore': ('http://wg-perception.github.com/object_recognition_core', None),
-                       'orklinemod': ('http://wg-perception.github.com/linemod', None),
-                       'orkrenderer': ('http://wg-perception.github.com/ork_renderer', None),
-                       'orktabletop': ('http://wg-perception.github.com/tabletop', None),
+intersphinx_mapping = {'orkcapture': ('http://wg-perception.github.io/capture', None),
+                       'orkcore': ('http://wg-perception.github.io/object_recognition_core', None),
+                       'orklinemod': ('http://wg-perception.github.io/linemod', None),
+                       'orkrenderer': ('http://wg-perception.github.io/ork_renderer', None),
+                       'orktabletop': ('http://wg-perception.github.io/tabletop', None),
 }

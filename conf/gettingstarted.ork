@@ -1,0 +1,44 @@
+source2:
+  type: RosKinect
+  module: 'object_recognition_ros.io'
+  parameters:
+    rgb_frame_id: camera_rgb_optical_frame
+    depth_image_topic: /camera/depth_registered/image_raw
+    depth_camera_info: /camera/depth_registered/camera_info
+    rgb_image_topic: /camera/rgb/image_rect_color
+    rgb_camera_info: /camera/rgb/camera_info
+
+sink1:
+  type: TablePublisher
+  module: 'object_recognition_tabletop'
+  inputs: [source2]
+
+sink2:
+  type: Publisher
+  module: 'object_recognition_ros.io'
+  inputs: [source2]
+
+
+pipeline1:
+  type: TabletopTableDetector
+  module: 'object_recognition_tabletop'
+  inputs: [source2]
+  outputs: [sink1]
+  parameters:
+    table_detector:
+        min_table_size: 1000
+        plane_threshold: 0.01
+
+pipeline2:
+  type: TabletopObjectDetector
+  module: 'object_recognition_tabletop'
+  inputs: [source2, pipeline1]
+  outputs: [sink2]
+  parameters:
+    object_ids: 'all'
+    tabletop_object_ids: 'REDUCED_MODEL_SET'
+    threshold: 0.65
+    db:
+      type: CouchDB
+      root: http://localhost:5984
+      collection: object_recognition
